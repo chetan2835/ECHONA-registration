@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EchoNA Event Registration Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .readonly-box {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .pay-button {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .pay-button:hover {
+            background-color: #218838;
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .events-container label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+        }
+
+        .terms-container {
+            margin-top: 20px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+        }
+
+        .terms-container label {
+            font-weight: normal;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        select {
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        const FIXED_TEAM_SIZE = 1;  // Fixed team size
+
+        function handleCategoryChange() {
+            const category = document.getElementById('category').value;
+            document.getElementById('attendee-form').style.display = (category === 'attendee') ? 'block' : 'none';
+            document.getElementById('participant-form').style.display = (category === 'participant') ? 'block' : 'none';
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let singleEventsAmount = 0;
+            document.querySelectorAll('.single-event-checkbox').forEach(cb => {
+                if (cb.checked) {
+                    singleEventsAmount += parseInt(cb.dataset.price);
+                }
+            });
+
+            let groupEventsAmount = 0;
+
+            document.querySelectorAll('.group-event-checkbox').forEach(cb => {
+                if (cb.checked) {
+                    groupEventsAmount += parseInt(cb.dataset.price) * FIXED_TEAM_SIZE;
+                }
+            });
+
+            document.getElementById('single-events-amount').value = singleEventsAmount;
+            document.getElementById('group-events-amount').value = groupEventsAmount;
+
+            const finalAmount = singleEventsAmount + groupEventsAmount;
+            document.getElementById('final-amount').value = finalAmount;
+        }
+
+        function validateAndPay(event) {
+            const tncChecked = document.getElementById('tnc').checked;
+            if (!tncChecked) {
+                alert('You must accept the Terms and Conditions.');
+                event.preventDefault();
+                return false;
+            }
+
+            const finalAmount = document.getElementById('final-amount').value;
+            const payLink = `https://example-payment.com/pay?amount=${finalAmount}`;
+            window.location.href = payLink;
+            event.preventDefault();
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>ECHONA Event Registration Form</h2>
+
+    <label for="category">Select Category</label>
+    <select id="category" onchange="handleCategoryChange()" required>
+        <option value="">-- Select --</option>
+        <option value="attendee">Only Attendee</option>
+        <option value="participant">Participant</option>
+    </select>
+
+    <!-- Only Attendee Form -->
+    <form id="attendee-form" style="display: none;">
+        <h3>Only Attendee (for night event Only)</h3>
+
+        <label>Name</label>
+        <input type="text" required />
+
+        <label>College ID</label>
+        <input type="text" required />
+
+        <label>College Name</label>
+        <input type="text" required />
+
+        <label>Mobile No</label>
+        <input type="tel" pattern="[0-9]{10}" required />
+
+        <label>Email ID</label>
+        <input type="email" required />
+
+        <div class="readonly-box">Fees: ₹200</div>
+<div class="terms-container">
+    <h4>Terms & Conditions (Only Attendee)</h4>
+    <ul style="padding-left: 20px;">
+        
+        <li>The event itinerary will be finalized near the event date.  
+            In case of any changes, participants will be notified via WhatsApp only:  
+            <a href="https://chat.whatsapp.com/J2PFyrk9SJ3GETymM9ast3" target="_blank" style="color: #007bff;">Join Official WhatsApp Group</a></li>
+
+        <li>Participants must follow all event rules, respect other attendees, and act responsibly throughout the event tenure.</li>
+
+        <li>All personal data shared during registration will be used solely for official event communication and logistics.</li>
+    </ul>
+
+    <label style="margin-top: 15px; font-weight: bold;">
+        <input type="checkbox" id="tnc-attendee" required /> I have read, understood, and agree to the above terms and conditions.
+    </label>
+</div>
+
+
+
+        <button class="pay-button">Pay ₹200</button>
+    </form>
+
+    <!-- Participant Form -->
+    <form id="participant-form" onsubmit="validateAndPay(event)" style="display: none;">
+        <h3>Participant Registration</h3>
+
+        <label>Team Leader Name</label>
+        <input type="text" required />
+
+        <label>College ID</label>
+        <input type="text" required />
+
+        <label>College Name</label>
+        <input type="text" required />
+
+        <label>Mobile No</label>
+        <input type="tel" pattern="[0-9]{10}" required />
+
+        <label>Email ID</label>
+        <input type="email" required />
+
+        <div style="margin-top: 20px;">
+            <h4>Single Events (Select multiple)</h4>
+            <div class="events-container">
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> CodeClash (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> SurSangram (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> Drop That Beat (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> Jaadu-E-Alfaz (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> VerseVendetta (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> Roadies  (₹200, solo)</label>
+                <label><input type="checkbox" class="single-event-checkbox" data-price="200"
+                        onchange="calculateTotal()" /> Clayra (₹200, solo)</label>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4>Group Events (Select multiple)</h4>
+            <div class="events-container">
+                <label><input type="checkbox" class="group-event-checkbox" data-price="800"
+                        onchange="calculateTotal()" /> CineSpark (₹800, 4 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="1000"
+                        onchange="calculateTotal()" /> Tamasha (₹1000, 5-10 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="1000"
+                        onchange="calculateTotal()" /> Drop That Beat (₹1000, min. 5 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="2500"
+                        onchange="calculateTotal()" /> VogueVerse (₹2500, min. 10 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="600"
+                        onchange="calculateTotal()" /> ArchMinds (₹600, 3 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="800"
+                        onchange="calculateTotal()" /> IPL Auction (₹800, 4 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="400"
+                        onchange="calculateTotal()" /> BotBrew (₹400, 2 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="600"
+                        onchange="calculateTotal()" /> Scavenger Hunt (₹600, 3 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="400"
+                        onchange="calculateTotal()" /> NeuroCanvas (₹400, 2 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="400"
+                        onchange="calculateTotal()" /> MetalMorph (₹400, 2 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="400"
+                        onchange="calculateTotal()" /> TechTussle (₹400, 2 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="600"
+                        onchange="calculateTotal()" /> Aqua Rocket (₹600, 3 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="800"
+                        onchange="calculateTotal()" /> GameOn: Arena Wars:BGMI (₹800, 4 person)</label>
+                <label><input type="checkbox" class="group-event-checkbox" data-price="500"
+                        onchange="calculateTotal()" /> GameOn: Arena Wars:VALORENT (₹500, 5 person)</label>
+            </div>
+        </div>
+
+        <label>Single Events Amount (₹):</label>
+        <input type="text" id="single-events-amount" class="readonly-box" value="0" readonly />
+
+        <label>Group Events Amount (₹):</label>
+        <input type="text" id="group-events-amount" class="readonly-box" value="0" readonly />
+
+        <label>Final Amount (₹):</label>
+        <input type="text" id="final-amount" class="readonly-box" value="0" readonly />
+
+<div class="terms-container">
+    <h4>Terms & Conditions (Participant)</h4>
+    <ul style="padding-left: 20px;">
+        <li>Please check the full event timeline before registering:  
+            <a href="/TL.pdf" target="_blank" style="color: #007bff;">View Timeline Here</a>.  
+            Any schedule conflicts due to late registration are solely the responsibility of the participant.</li>
+
+        <li>Every team leader must join the official WhatsApp group before registering:  
+            <a href="https://chat.whatsapp.com/EK5Jz3dLOg43w6fzGP4DLl" target="_blank" style="color: #007bff;">Join Official WhatsApp Group</a></li>
+
+        <li>If you wish to participate in a Group Event alone, the full group event fee will still apply as the pricing is fixed per group.</li>
+
+        <li>The event itinerary will be finalized near the event date.  
+            In case of any changes, participants will be notified via WhatsApp only.</li>
+
+        <li>Participants must follow all event rules, respect other participants, and act responsibly throughout the event tenure.</li>
+
+        <li>All personal data shared during registration will be used solely for official event communication and logistics.</li>
+    </ul>
+
+    <label style="margin-top: 15px; font-weight: bold;">
+        <input type="checkbox" id="tnc-participant" required /> I have read, understood, and agree to the above terms and conditions.
+    </label>
+</div>
+
+
+
+        <button class="pay-button">Final Pay</button>
+    </form>
+
+</body>
+
+</html>
