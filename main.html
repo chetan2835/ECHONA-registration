@@ -181,23 +181,19 @@
         <input type="email" required />
 
         <div class="readonly-box">Fees: ₹200</div>
-<div class="terms-container">
-    <h4>Terms & Conditions (Only Attendee)</h4>
+
+        <div class="terms-container">
+    <h4>Terms & Conditions</h4>
     <ul style="padding-left: 20px;">
-        
-        <li>The event itinerary will be finalized near the event date.  
-            In case of any changes, participants will be notified via WhatsApp only:  
-            <a href="https://chat.whatsapp.com/J2PFyrk9SJ3GETymM9ast3" target="_blank" style="color: #007bff;">Join Official WhatsApp Group</a></li>
-
-        <li>Participants must follow all event rules, respect other attendees, and act responsibly throughout the event tenure.</li>
-
-        <li>All personal data shared during registration will be used solely for official event communication and logistics.</li>
+ 
+        <li>College ID and Government ID proof of every member is mandatory for entry to the event.</li>
     </ul>
 
     <label style="margin-top: 15px; font-weight: bold;">
-        <input type="checkbox" id="tnc-attendee" required /> I have read, understood, and agree to the above terms and conditions.
+        <input type="checkbox" id="tnc-final" required /> I have read, understood, and agree to the above terms and conditions.
     </label>
 </div>
+
 
 
 
@@ -231,15 +227,15 @@
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
                         onchange="calculateTotal()" /> SurSangram (₹200, solo)</label>
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
-                        onchange="calculateTotal()" /> Drop That Beat (₹200, solo)</label>
+                        onchange="calculateTotal()" /> Drop That Beat {Dance} (₹200, solo)</label>
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
-                        onchange="calculateTotal()" /> Jaadu-E-Alfaz (₹200, solo)</label>
+                        onchange="calculateTotal()" /> Jaadu-E-Alfaz {Poetry} (₹200, solo)</label>
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
-                        onchange="calculateTotal()" /> VerseVendetta (₹200, solo)</label>
+                        onchange="calculateTotal()" /> VerseVendetta {Rap Battle} (₹200, solo)</label>
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
                         onchange="calculateTotal()" /> Roadies  (₹200, solo)</label>
                 <label><input type="checkbox" class="single-event-checkbox" data-price="200"
-                        onchange="calculateTotal()" /> Clayra (₹200, solo)</label>
+                        onchange="calculateTotal()" /> Clayra {Clay Sculpting} (₹200, solo)</label>
             </div>
         </div>
 
@@ -247,27 +243,27 @@
             <h4>Group Events (Select multiple)</h4>
             <div class="events-container">
                 <label><input type="checkbox" class="group-event-checkbox" data-price="800"
-                        onchange="calculateTotal()" /> CineSpark (₹800, 4 person)</label>
+                        onchange="calculateTotal()" /> CineSpark {Short Film Making} (₹800, 4 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="1000"
                         onchange="calculateTotal()" /> Tamasha (₹1000, 5-10 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="1000"
-                        onchange="calculateTotal()" /> Drop That Beat (₹1000, min. 5 person)</label>
+                        onchange="calculateTotal()" /> Drop That Beat {Dance} (₹1000, min. 5 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="2500"
-                        onchange="calculateTotal()" /> VogueVerse (₹2500, min. 10 person)</label>
+                        onchange="calculateTotal()" /> VogueVerse {Fashion Show} (₹2500, min. 10 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="600"
-                        onchange="calculateTotal()" /> ArchMinds (₹600, 3 person)</label>
+                        onchange="calculateTotal()" /> ArchMinds {Bridge Building} (₹600, 3 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="800"
                         onchange="calculateTotal()" /> IPL Auction (₹800, 4 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="400"
-                        onchange="calculateTotal()" /> BotBrew (₹400, 2 person)</label>
+                        onchange="calculateTotal()" /> BotBrew {Build a Chatbot} (₹400, 2 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="600"
                         onchange="calculateTotal()" /> Scavenger Hunt (₹600, 3 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="400"
-                        onchange="calculateTotal()" /> NeuroCanvas (₹400, 2 person)</label>
+                        onchange="calculateTotal()" /> NeuroCanvas {AI Art Battle} (₹400, 2 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="400"
-                        onchange="calculateTotal()" /> MetalMorph (₹400, 2 person)</label>
+                        onchange="calculateTotal()" /> MetalMorph {Gas Welding Art} (₹400, 2 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="400"
-                        onchange="calculateTotal()" /> TechTussle (₹400, 2 person)</label>
+                        onchange="calculateTotal()" /> TechTussle {Debate} (₹400, 2 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="600"
                         onchange="calculateTotal()" /> Aqua Rocket (₹600, 3 person)</label>
                 <label><input type="checkbox" class="group-event-checkbox" data-price="800"
@@ -287,29 +283,21 @@
         <input type="text" id="final-amount" class="readonly-box" value="0" readonly />
 
 <div class="terms-container">
-    <h4>Terms & Conditions (Participant)</h4>
+    <h4>Terms & Conditions</h4>
     <ul style="padding-left: 20px;">
-        <li>Please check the full event timeline before registering:  
-            <a href="/TL.pdf" target="_blank" style="color: #007bff;">View Timeline Here</a>.  
-            Any schedule conflicts due to late registration are solely the responsibility of the participant.</li>
+        <li>Please check the full event timeline before registering:(Website Url in text) To avoid clash in the events.</li>
 
-        <li>Every team leader must join the official WhatsApp group before registering:  
-            <a href="https://chat.whatsapp.com/EK5Jz3dLOg43w6fzGP4DLl" target="_blank" style="color: #007bff;">Join Official WhatsApp Group</a></li>
+        <li>If you have opted for a Group Event, you will be the Team Leader and must forward all team members' details to:  
+            <a href="mailto:student.council@anandice.ac.in" style="color: #007bff;">student.council@anandice.ac.in</a></li>
 
-        <li>If you wish to participate in a Group Event alone, the full group event fee will still apply as the pricing is fixed per group.</li>
-
-        <li>The event itinerary will be finalized near the event date.  
-            In case of any changes, participants will be notified via WhatsApp only.</li>
-
-        <li>Participants must follow all event rules, respect other participants, and act responsibly throughout the event tenure.</li>
-
-        <li>All personal data shared during registration will be used solely for official event communication and logistics.</li>
+        <li>College ID and Government ID proof of every member is mandatory for entry to the event.</li>
     </ul>
 
     <label style="margin-top: 15px; font-weight: bold;">
-        <input type="checkbox" id="tnc-participant" required /> I have read, understood, and agree to the above terms and conditions.
+        <input type="checkbox" id="tnc-final" required /> I have read, understood, and agree to the above terms and conditions.
     </label>
 </div>
+
 
 
 
